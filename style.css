@@ -3,11 +3,31 @@
 }
 
 :root {
-    --colorGreen: #86bb23;
-    --colorDarkGreen: #585857; 
+    --colorGreen: #189232;
+    --colorDarkGrey: #585857; 
     --colorDarkBlue: #005e7d;
 } 
+
+
    
 .logo {
     color: var(--colorGreen);
+}
+
+.navbar-link-custom {
+    color: var(--colorGreen); 
+}
+
+.carousel-item {
+    height: 80vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+.bg-custom {
+    background-color: rgba(128, 128, 128, 0.418) ;
 }
