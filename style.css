@@ -12,6 +12,24 @@
    
 .logo {
     color: var(--colorGreen);
+    font-size: x-large;
+    font-weight: 900;
+}
+
+.navCustom{
+    font-size: x-large;
+    font-weight: 900 !important;
+    color: black !important;
+    transition: 0.4s;
+}
+
+.navCustom:hover{
+    transform: scale(1.2);
+
+}
+
+.nav-link:hover{
+    color: white !important;
 }
 
 .navbar-link-custom {
