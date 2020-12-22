@@ -114,4 +114,22 @@
 
 /* Fine Sezione Esagono */
 
+/* Inizio Sezione Dinamica */
+
+.counter-custom {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 150px;
+    width: 150px;
+    border: solid 7px var(--colorGreen);
+    border-radius: 100px;
+    transition: 0.4s;
+    
+}
+
+.counter-custom:hover{
+    transform: translateX(15px);
+
+}
+
 
