@@ -6,6 +6,7 @@
     --colorGreen: #189232;
     --colorDarkGrey: #585857; 
     --colorDarkBlue: #005e7d;
+    --colorLightBlue: #4bbbd1;
 } 
 
 
@@ -28,8 +29,12 @@
 
 }
 
+.nav-link{
+    color: black !important;
+}
+
 .nav-link:hover{
-    color: white !important;
+    color: var(--colorGreen) !important;
 }
 
 .navbar-link-custom {
@@ -37,7 +42,7 @@
 }
 
 .carousel-item {
-    height: 80vh;
+    height: 90vh;
     min-height: 350px;
     background: no-repeat center center scroll;
     -webkit-background-size: cover;
@@ -46,23 +51,29 @@
     background-size: cover;
 }
 
-.bg-custom {
-    background-color: rgba(128, 128, 128, 0.418) ;
+.bg-arrow {
+    color: var(--colorGreen) !important;
 }
 
-/* esagono */
+.bg-custom {
+    background-color: rgba(255, 255, 255, 0.803) ;
+}
+
+
+/* Sezione Esagono */
 
 .hexagon {
   width: 100px;
   height: 55px;
   position: relative;
+  transition: 0,8s;
 }
 
 .hexagon, 
 .hexagon:before, 
 .hexagon:after {
-  background: red;
-  box-shadow: 0 0 10px rgba(0,0,0,0.8);   
+  background: var(--colorGreen);
+  /* box-shadow: 0 0 10px rgba(0,0,0,0.8);    */
 }
 
 .hexagon:before,
@@ -89,7 +100,18 @@
   left: 0;
   width: 100px;
   height: 55px;
-  background: red;
+  background: var(--colorGreen);
   z-index: 1;
 }
+
+.rotate {
+    transition: 0.8s;
+}
+
+.rotate:hover {
+    transform: rotate(360deg);
+}
+
+/* Fine Sezione Esagono */
+
 
