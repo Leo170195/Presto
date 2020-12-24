@@ -36,6 +36,17 @@
 .nav-link{
     color: black !important;
 }
+.btn-custom{
+    background-color: var(--colorGreen);
+    color: white;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+.btn-custom:hover{
+    background-color: white;
+    color:  var(--colorGreen);
+    border: solid 2px var(--colorGreen);
+}
 
 .nav-link:hover{
     color: var(--colorGreen) !important;

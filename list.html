@@ -29,7 +29,7 @@
     </style>
     
   </head>
-  <body>
+  <body class="bg-body">
      <!-- NAVBAR  -->
     <nav class="navbar navbar-expand-md navbar-light bg-custom rounded fixed-top my-0 py-0" aria-label="Eleventh navbar example">
         <div class="container-fluid ">
@@ -88,7 +88,7 @@
                       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body" id="categoryRadioButton">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios2" id="tutti" value="tutte" checked>
+                                <input class="form-check-input" data-filter="tutti" type="radio" name="exampleRadios2" id="tutti" value="tutti" checked>
                                 <label class="form-check-label" for="tutti">
                                   Tutte
                                 </label>
@@ -109,7 +109,7 @@
                             <form>
                                 <div class="form-group text-center">
                                   <label id="change" for="formControlRange"></label>
-                                  <input id="inputPrice" type="range" class="form-control-range" id="formControlRange">
+                                  <input id="inputPrice" type="range" class="form-control-range">
                                 </div>
                                 <div id="price" class="d-flex justify-content-between nav-link">
                                 </div>
@@ -132,8 +132,14 @@
                       </div>
                     </div>
                   </div>
+                  <div>
+                    <button id="filterAds" class="btn btn-custom m-5">Filtra Annunci</button>
+                  </div>
               </div>
-              <div class="col-8"></div>
+              <div  class="col-8">
+                <div class="row mt-5" id="cardGenerate">
+                </div>
+              </div>
           </div>
       </div>
 
@@ -168,7 +174,7 @@
                         let form = document.createElement('div')
                         form.classList.add('form-check')
                         form.innerHTML = `
-                            <input class="form-check-input" type="radio" name="exampleRadios2" id="${el}" value="${el}">
+                            <input data-filter="${el}"  class="form-check-input" type="radio" name="exampleRadios2" id="${el}" value="${el}">
                             <label class="form-check-label" for="${el}">
                                 ${el}
                             </label>
@@ -199,13 +205,66 @@
                 }
                 populatePrice()
 
-                function filteredWord  (){
+                function populateWord  (){
                     let word = document.querySelector('#filteredWord') 
                     word.addEventListener('input' , () => {
-                        console.log(word.value);
                     })
                 }
-                filteredWord()
+                populateWord()
+
+                let i = 300
+
+                function generateCard (cards){
+                  let card = document.querySelector("#cardGenerate")
+                  cards.forEach(el => {
+                    let create = document.createElement("div")
+                    create.classList.add("col-12", "col-md-6", "col-lg-4")
+                    create.innerHTML= `
+                    <div class="card mb-3">
+                      <div class="row no-gutters">
+                        <div class="col-12">
+                          <img src="https://picsum.photos/${i}/200" class="card-img img-fluid" alt="image">
+                        </div>
+                        <div class="col-12">
+                          <div class="card-body">
+                            <h4 class="card-title">${el.name}</h4>
+                            <p class="card-text nav-link">Categoria : ${el.category}</p>
+                            <p class="card-text logo">Prezzo ${el.price}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    `
+                    i++
+                    card.appendChild(create)
+                  })
+                }
+                generateCard(data)
+
+               function filterAds (){
+                 let filter = document.querySelector("#filterAds")
+                 filter.addEventListener('click' , () => {
+                   //  valori da filtrare
+                   let filterCategory = Array.from(document.querySelectorAll('input[type="radio"]')).filter(el => el.checked == true)[0].getAttribute('data-filter')
+                   let filterPrice = document.querySelector('#inputPrice').value
+                   let filterWord = document.querySelector('#filteredWord').value
+                   //  filtri
+                   input.addEventListener('input' , () => {
+                    change.innerHTML = `${input.value} $`
+                  })
+                   let filterByPrice = data.filter(ad => Number(ad.price) < Number(filterPrice))
+                  let filterByCategory = []
+                  if(filterCategory != 'tutti'){
+                    filterByCategory = filterByPrice.filter(ad => ad.category == filterCategory)
+                  } else {
+                    filterByCategory = filterByPrice.map(el => el)
+                  }
+                  let filterByWord = filterByCategory.filter(ad => ad.name.toLowerCase().includes(filterWord.toLowerCase()))
+                  console.log(filterByWord);
+                  populateWord(filterByWord)
+                 })
+               } 
+               filterAds()
             })
         </script>
       </body>
