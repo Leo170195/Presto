@@ -88,8 +88,8 @@
                       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body" id="categoryRadioButton">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                <label class="form-check-label" for="exampleRadios1">
+                                <input class="form-check-input" type="radio" name="exampleRadios2" id="tutti" value="tutte" checked>
+                                <label class="form-check-label" for="tutti">
                                   Tutte
                                 </label>
                               </div>
@@ -108,11 +108,10 @@
                         <div class="card-body">
                             <form>
                                 <div class="form-group text-center">
-                                  <label for="formControlRange">XX$</label>
-                                  <input type="range" class="form-control-range" id="formControlRange">
+                                  <label id="change" for="formControlRange"></label>
+                                  <input id="inputPrice" type="range" class="form-control-range" id="formControlRange">
                                 </div>
                                 <div id="price" class="d-flex justify-content-between nav-link">
-                                    
                                 </div>
                               </form>
                         </div>
@@ -128,7 +127,7 @@
                       </div>
                       <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                         <div class="card-body">
-                            <input class="form-control" type="text" placeholder="Default input">
+                            <input id="filteredWord" class="form-control" type="text" placeholder="Cerca il tuo articolo">
                         </div>
                       </div>
                     </div>
@@ -181,16 +180,32 @@
                 populateCategory()
 
                 function populatePrice(){
+                    let change = document.querySelector('#change') 
                     let control = document.querySelector("#price")
-                    let price = data.map(pr => pr.price)
-                    price.sort((a,b) => a-b)
+                    let max = Math.ceil((data.map(pr => pr.price).sort((a,b) => a-b)).pop())
+                    let min = Math.ceil((data.map(pr => pr.price).sort((a,b) => a-b)).shift())
+                    let input = document.querySelector('#inputPrice')
                     control.innerHTML = `
-                    <p>${price[0]}</p>
-                    <p>${price[(price.length - 1)]}</p>
+                    <p>${min} $</p>
+                    <p>${max} $</p>
                     `
-
+                    input.max = max
+                    input.value = max
+                    input.min = min
+                        change.innerHTML = `${max} $`
+                    input.addEventListener('input' , () => {
+                        change.innerHTML = `${input.value} $`
+                    })
                 }
                 populatePrice()
+
+                function filteredWord  (){
+                    let word = document.querySelector('#filteredWord') 
+                    word.addEventListener('input' , () => {
+                        console.log(word.value);
+                    })
+                }
+                filteredWord()
             })
         </script>
       </body>
