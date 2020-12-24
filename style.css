@@ -9,6 +9,10 @@
     --colorLightBlue: #4bbbd1;
 } 
 
+.bg-body{
+    background-color: whitesmoke;
+}
+
 
 
 .logo {
