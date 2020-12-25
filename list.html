@@ -133,7 +133,10 @@
                     </div>
                   </div>
                   <div>
-                    <button id="filterAds" class="btn btn-custom m-5">Filtra Annunci</button>
+                    <button id="filterAds" class="btn btn-custom m-3">Filtra Annunci</button>
+                  </div>
+                  <div>
+                    <button id="reset" class="btn btn-custom m-3">Resetta Annunci</button>
                   </div>
               </div>
               <div  class="col-8">
@@ -200,22 +203,23 @@
                     input.min = min
                         change.innerHTML = `${max} $`
                     input.addEventListener('input' , () => {
-                        change.innerHTML = `${input.value} $`
+                        change.innerHTML = input.value + '$'
                     })
                 }
                 populatePrice()
 
-                function populateWord  (){
-                    let word = document.querySelector('#filteredWord') 
-                    word.addEventListener('input' , () => {
-                    })
-                }
-                populateWord()
+                // function populateWord  (){
+                //     let word = document.querySelector('#filteredWord') 
+                //     word.addEventListener('input' , () => {
+                //     })
+                // }
+                // populateWord()
 
                 let i = 300
 
                 function generateCard (cards){
                   let card = document.querySelector("#cardGenerate")
+                  card.innerHTML = ''
                   cards.forEach(el => {
                     let create = document.createElement("div")
                     create.classList.add("col-12", "col-md-6", "col-lg-4")
@@ -249,9 +253,7 @@
                    let filterPrice = document.querySelector('#inputPrice').value
                    let filterWord = document.querySelector('#filteredWord').value
                    //  filtri
-                   input.addEventListener('input' , () => {
-                    change.innerHTML = `${input.value} $`
-                  })
+                  
                    let filterByPrice = data.filter(ad => Number(ad.price) < Number(filterPrice))
                   let filterByCategory = []
                   if(filterCategory != 'tutti'){
@@ -260,11 +262,24 @@
                     filterByCategory = filterByPrice.map(el => el)
                   }
                   let filterByWord = filterByCategory.filter(ad => ad.name.toLowerCase().includes(filterWord.toLowerCase()))
-                  console.log(filterByWord);
-                  populateWord(filterByWord)
+
+                  generateCard(filterByWord)
                  })
                } 
                filterAds()
+
+               function reset () {
+                 let reset = document.querySelector("#reset")
+                 reset.addEventListener('click' , () => {
+                   max = Math.ceil((data.map(pr => pr.price).sort((a,b) => a-b)).pop())
+                   document.querySelector('#inputPrice').value = max
+                   document.querySelector('#change').innerHTML = max + '$'
+                   document.querySelector('#filteredWord').value = ''
+                   document.querySelector('[data-filter="tutti"]').checked = true
+                  generateCard(data)
+                 })
+               }
+               reset()
             })
         </script>
       </body>
