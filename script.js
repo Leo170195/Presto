@@ -149,3 +149,67 @@ fetch('./prodotti.json')
    }
    reset()
 })
+// Fine Ricerca
+
+// Sezione Annunci Pagina Profilo
+
+let table = document.querySelector('#tablebody');
+console.log(table);
+
+// Creo l'oggetto profileUser
+let profileUser = [ 
+  {
+    'prodotto': 'moto',
+    'descrizione': 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    'prezzo': 1000,
+    'status': true
+  },
+
+  {
+    'prodotto': 'auto',
+    'descrizione': 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    'prezzo': 3000,
+    'status': true
+  },
+
+  {
+    'prodotto': 'scooter',
+    'descrizione': 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    'prezzo': 600,
+    'status': false
+  },
+
+]
+// console.log(profileUser);
+// Ciclo tutti gli elementi della tabella
+profileUser.forEach(( el , index) => {
+  let riga = document.createElement("tr")
+
+  // controllo lo status
+  if (el.status){
+
+    riga.innerHTML = `
+    <th scope="row">${index+1}</th>
+    <td>${el.prodotto}</td>
+    <td>${el.prezzo}</td>
+    <td>${el.descrizione}</td>
+    <td><i class="far fa-check-circle text-success"></i></td>
+
+    `
+
+  } else {
+
+    riga.innerHTML = `
+    <th scope="row">${index+1}</th>
+    <td>${el.prodotto}</td>
+    <td>${el.prezzo}</td>
+    <td>${el.descrizione}</td>
+    <td><i class="fas fa-times-circle text-danger"></i></td>
+
+    `
+  }
+  
+table.appendChild(riga)
+// console.log(el);
+})
+
