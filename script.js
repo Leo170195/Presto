@@ -40,5 +40,112 @@ function counterFunction (){
 }
 document.addEventListener('scroll' , counterFunction)
 
+// implementazione ricerca
 
+fetch('./prodotti.json')
+.then(response => response.json())
+.then(data => {
+    function populateCategory(){
+        let radio = document.querySelector("#categoryRadioButton")
+        let categories = new Set(data.map(ad => ad.category))
+        categories.forEach(el => {
+            let form = document.createElement('div')
+            form.classList.add('form-check')
+            form.innerHTML = `
+                <input data-filter="${el}"  class="form-check-input" type="radio" name="exampleRadios2" id="${el}" value="${el}">
+                <label class="form-check-label" for="${el}">
+                    ${el}
+                </label>
+            `
+            radio.appendChild(form)
+        })
+       
+    }
+    populateCategory()
 
+    function populatePrice(){
+        let change = document.querySelector('#change') 
+        let control = document.querySelector("#price")
+        let max = Math.ceil((data.map(pr => pr.price).sort((a,b) => a-b)).pop())
+        let min = Math.ceil((data.map(pr => pr.price).sort((a,b) => a-b)).shift())
+        let input = document.querySelector('#inputPrice')
+        control.innerHTML = `
+        <p>${min} $</p>
+        <p>${max} $</p>
+        `
+        input.max = max
+        input.value = max
+        input.min = min
+            change.innerHTML = `${max} $`
+        input.addEventListener('input' , () => {
+            change.innerHTML = input.value + '$'
+        })
+    }
+    populatePrice()
+
+    let i = 300
+
+    function generateCard (cards){
+      let card = document.querySelector("#cardGenerate")
+      card.innerHTML = ''
+      cards.forEach(el => {
+        let create = document.createElement("div")
+        create.classList.add("col-12", "col-md-6", "col-lg-4")
+        create.innerHTML= `
+        <div class="card mb-3">
+          <div class="row no-gutters">
+            <div class="col-12">
+              <img src="https://picsum.photos/${i}/200" class="card-img img-fluid" alt="image">
+            </div>
+            <div class="col-12">
+              <div class="card-body">
+                <h4 class="card-title">${el.name}</h4>
+                <p class="card-text nav-link">Categoria : ${el.category}</p>
+                <p class="card-text logo">Prezzo ${el.price}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        `
+        i++
+        card.appendChild(create)
+      })
+    }
+    generateCard(data)
+
+   function filterAds (){
+     let filter = document.querySelector("#filterAds")
+     filter.addEventListener('click' , () => {
+       //  valori da filtrare
+       let filterCategory = Array.from(document.querySelectorAll('input[type="radio"]')).filter(el => el.checked == true)[0].getAttribute('data-filter')
+       let filterPrice = document.querySelector('#inputPrice').value
+       let filterWord = document.querySelector('#filteredWord').value
+       //  filtri
+      
+       let filterByPrice = data.filter(ad => Number(ad.price) < Number(filterPrice))
+      let filterByCategory = []
+      if(filterCategory != 'tutti'){
+        filterByCategory = filterByPrice.filter(ad => ad.category == filterCategory)
+      } else {
+        filterByCategory = filterByPrice.map(el => el)
+      }
+      let filterByWord = filterByCategory.filter(ad => ad.name.toLowerCase().includes(filterWord.toLowerCase()))
+
+      generateCard(filterByWord)
+     })
+   } 
+   filterAds()
+
+   function reset () {
+     let reset = document.querySelector("#reset")
+     reset.addEventListener('click' , () => {
+       max = Math.ceil((data.map(pr => pr.price).sort((a,b) => a-b)).pop())
+       document.querySelector('#inputPrice').value = max
+       document.querySelector('#change').innerHTML = max + '$'
+       document.querySelector('#filteredWord').value = ''
+       document.querySelector('[data-filter="tutti"]').checked = true
+      generateCard(data)
+     })
+   }
+   reset()
+})
