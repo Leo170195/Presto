@@ -52,6 +52,18 @@
     border: solid 2px var(--colorGreen);
 }
 
+.btn-custom2{
+    background-color: white;
+    color:  var(--colorGreen);
+    font-weight: 800;
+    letter-spacing: 1px;
+    border: solid 2px var(--colorGreen);
+}
+.btn-custom2:hover{
+    background-color: var(--colorGreen);
+    color: white;
+}
+
 .nav-link:hover{
     color: var(--colorGreen) !important;
 }

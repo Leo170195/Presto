@@ -179,6 +179,20 @@ let profileUser = [
     'status': false
   },
 
+  {
+    'prodotto': 'bicicletta',
+    'descrizione': 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    'prezzo': 900,
+    'status': true
+  },
+
+  {
+    'prodotto': 'Nonna',
+    'descrizione': 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    'prezzo': 20,
+    'status': false
+  },
+
 ]
 // console.log(profileUser);
 // Ciclo tutti gli elementi della tabella
@@ -191,7 +205,7 @@ profileUser.forEach(( el , index) => {
     riga.innerHTML = `
     <th scope="row">${index+1}</th>
     <td>${el.prodotto}</td>
-    <td>${el.prezzo}</td>
+    <td>${el.prezzo} $</td>
     <td>${el.descrizione}</td>
     <td><i class="far fa-check-circle text-success"></i></td>
 
@@ -202,7 +216,7 @@ profileUser.forEach(( el , index) => {
     riga.innerHTML = `
     <th scope="row">${index+1}</th>
     <td>${el.prodotto}</td>
-    <td>${el.prezzo}</td>
+    <td>${el.prezzo} $</td>
     <td>${el.descrizione}</td>
     <td><i class="fas fa-times-circle text-danger"></i></td>
 
