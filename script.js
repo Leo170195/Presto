@@ -1,3 +1,12 @@
+let navbar = document.querySelector("nav")
+
+window.addEventListener('scroll' , () => {
+  if ( window.pageYOffset > 500 ){
+    navbar.classList.add("bg-white" , "shadow")
+  } else if ( window.pageYOffset < 500 ) {
+    navbar.classList.remove("bg-white")
+  }
+})
 
 // Creo l'oggetto 
 
@@ -223,6 +232,5 @@ profileUser.forEach(( el , index) => {
   }
   
 table.appendChild(riga)
-// console.log(el);
 })
 
