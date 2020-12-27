@@ -154,7 +154,6 @@ fetch('./prodotti.json')
 // Sezione Annunci Pagina Profilo
 
 let table = document.querySelector('#tablebody');
-console.log(table);
 
 // Creo l'oggetto profileUser
 let profileUser = [ 
