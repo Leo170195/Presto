@@ -8,6 +8,9 @@
     --colorDarkBlue: #005e7d;
     --colorLightBlue: #4bbbd1;
 } 
+html{
+    scroll-behavior: smooth;
+}
 
 .bg-body{
     background-color: whitesmoke;
