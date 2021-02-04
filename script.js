@@ -194,13 +194,6 @@ let profileUser = [
     'status': true
   },
 
-  {
-    'prodotto': 'Nonna',
-    'descrizione': 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'prezzo': 20,
-    'status': false
-  },
-
 ]
 // console.log(profileUser);
 // Ciclo tutti gli elementi della tabella
